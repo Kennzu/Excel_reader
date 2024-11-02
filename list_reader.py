@@ -14,10 +14,9 @@ class ExampleApp(QtWidgets.QMainWindow, excel_reader.Ui_MainWindow):
 
         self.folder_give = []
         self.folder_take = []
-        # Это здесь нужно для доступа к переменным, методам
-        # и т.д. в файле design.py
+
         super().__init__()
-        self.setupUi(self)  # Это нужно для инициализации нашего дизайна
+        self.setupUi(self) 
 
         self.toolButton.clicked.connect(self.first_folder)
         self.toolButton_2.clicked.connect(self.second_folder)
@@ -42,19 +41,13 @@ class ExampleApp(QtWidgets.QMainWindow, excel_reader.Ui_MainWindow):
             self.textBrowser_2.append(file_name2[0]) 
 
     def take_benificuarus(self):
-
-        # Загружаем книги
-        # wb = openpyxl.load_workbook('/Users/seu/python/excel/Реестр договоров_оригинал_28.10.xlsx')
-        # wb2 = openpyxl.load_workbook('/Users/seu/python/excel/Реестр_Final (Копия для Документарного отдела).xlsm')
         wb = openpyxl.load_workbook(self.folder_take[0])
         wb2= openpyxl.load_workbook(self.folder_give[0])
-
-        # Выбираем листы
         wb_sheet = wb['Реестр']
         wb_sheet2 = wb2['СВОДНАЯ']
 
         # Столбцы для копирования (индексы)
-        copy_columns = [2, 1, 8, 9, 14]  # Пример
+        copy_columns = [2, 1, 8, 9, 14] 
 
         # Функция для нахождения первой пустой строки
         def find_first_empty_row(sheet):
@@ -67,7 +60,6 @@ class ExampleApp(QtWidgets.QMainWindow, excel_reader.Ui_MainWindow):
         data = []
         beneficiary_dates = {}
 
-        # Шаблоны для поиска дат
         patterns = [
             r'(\d{1,2})(\d{2})(\d{2})',          # ddMMyy
             r'(\d{1,2})\.(\d{1,2})\.(\d{2})',    # dd.mm.yy
@@ -210,18 +202,12 @@ class ExampleApp(QtWidgets.QMainWindow, excel_reader.Ui_MainWindow):
         msg.setText("Бенифициары успешно определены!")
         msg.setWindowTitle("Информация")
         msg.exec_()
-        # msg.buttonClicked.connect()
-        # returnValue = msg.exec_()
-        # if returnValue == QMessageBox.Ok:
-        #     print('OK clicked')
 
-
-	
 def main():
-    app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
-    window = ExampleApp()  # Создаём объект класса ExampleApp
-    window.show()  # Показываем окно
-    app.exec_()  # и запускаем приложение
+    app = QtWidgets.QApplication(sys.argv)  
+    window = ExampleApp()  
+    window.show()
+    app.exec_() 
 
-if __name__ == '__main__':  # Если мы запускаем файл напрямую, а не импортируем
-    main()  # то запускаем функцию main()
+if __name__ == '__main__': 
+    main()
